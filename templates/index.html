@@ -249,6 +249,19 @@
             
             // Get the <div> element where the result or error message will be displayed
             const resultElement = document.getElementById('result');
+            // Guard invalid input
+            if (Number.isNaN(a) || Number.isNaN(b)) {
+                resultElement.innerText = 'Error: Invalid input';
+                return;
+            }
+
+            // Short-circuit for divide by zero to satisfy test
+            if (operation === 'divide' && b === 0) {
+                resultElement.innerText = 'Error: Cannot divide by zero!';
+                return;
+            }
+
+            // Optimistic UI for other operations
             if (operation === 'add') {
                 resultElement.innerText = 'Calculation Result: ' + (a + b);
             } else if (operation === 'subtract') {
